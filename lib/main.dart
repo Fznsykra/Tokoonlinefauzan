@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:tokoonlinefauzan/addproduct.dart';
-import 'package:tokoonlinefauzan/allproduct.dart';
-import 'package:tokoonlinefauzan/homepage.dart';
-import 'package:tokoonlinefauzan/productdetail.dart';
-import 'package:tokoonlinefauzan/productitems.dart';
-import 'package:tokoonlinefauzan/productupdate.dart';
-import 'package:tokoonlinefauzan/splashscrenn.dart';
-
+import 'package:product_app/Providers/ReviewProvider.dart';
+import 'package:provider/provider.dart';
+import 'Providers/product_provider.dart';
+import 'home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ProductProvider()),
+        ChangeNotifierProvider(create: (context) => ReviewProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: SplashScrenn(),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
     );
   }
 }
